@@ -111,7 +111,7 @@ for url in url_list:
 
         # if counter == 3:
         file=pd.DataFrame(all_data)
-        file.to_csv('Extracted.csv')      
+        file.to_excel('Extracted.xlsx',index=False, engine='openpyxl')      
         # exit(0)
 
     events_driver.close()   
