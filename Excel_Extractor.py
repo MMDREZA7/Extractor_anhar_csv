@@ -18,6 +18,7 @@ all_data = []
 # event_date_list = []
 # form_list = []
 
+month=0
 
    
 
@@ -36,10 +37,12 @@ print("urls: ", len(url_list))
 
 
 # counter = 0
-
+dayCounter = 0
 for url in url_list:
     
     main_driver.get(url)
+    dayCounter += 1
+    print('day',dayCounter)
 
     
     # Write Title Of DayPage
@@ -56,14 +59,16 @@ for url in url_list:
     ]
 
     print("Len Link1 " + str(len(article1_links)))
-    time.sleep(0.5)
     events_driver = webdriver.Chrome()
     event_date = ''
+    index = 0
     for link in article1_links:
 
         # mylink = link
         mylink_href = link.get_attribute("href")
-        print("Next Page")
+        index = index + 1
+        print('day: ',dayCounter , "event",index)
+        print("Next Event")
         events_driver.get(mylink_href)
 
         
@@ -91,6 +96,7 @@ for url in url_list:
 
         # Distinct content
         for span in article2_spans:
+
             if span.text in description:
                 continue
             else:
@@ -112,9 +118,8 @@ for url in url_list:
         # if counter == 3:
         file=pd.DataFrame(all_data)
         file.to_excel('Extracted.xlsx',index=False, engine='openpyxl')      
-        # exit(0)
 
-    events_driver.close()   
-      
+
+    events_driver.close()       
 
 main_driver.quit()
