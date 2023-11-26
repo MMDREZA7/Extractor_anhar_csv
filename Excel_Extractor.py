@@ -18,7 +18,6 @@ all_data = []
 # event_date_list = []
 # form_list = []
 
-month=0
 
    
 
@@ -39,7 +38,14 @@ print("urls: ", len(url_list))
 # counter = 0
 dayCounter = 0
 for url in url_list:
-    
+    if dayCounter == 366:
+        dayCounter = 0
+        print('first mounth finished')
+        print('first mounth finished')
+        print('first mounth finished')
+        print('first mounth finished')
+        print('first mounth finished')
+
     main_driver.get(url)
     dayCounter += 1
     print('day',dayCounter)
@@ -58,20 +64,21 @@ for url in url_list:
         if element.text != None and element.text != ""
     ]
 
-    print("Len Link1 " + str(len(article1_links)))
+    print("Len Link " + str(len(article1_links)))
     events_driver = webdriver.Chrome()
     event_date = ''
-    index = 0
+    eventCounter = 0
     for link in article1_links:
 
         # mylink = link
         mylink_href = link.get_attribute("href")
-        index = index + 1
-        print('day: ',dayCounter , "event",index)
+        eventCounter = eventCounter + 1
+        print('day: ',dayCounter , "event",eventCounter)
         print("Next Event")
         events_driver.get(mylink_href)
 
         
+
 
         # Write Titles Of EventPage
         title = events_driver.find_element(By.TAG_NAME, "h1")
@@ -83,7 +90,12 @@ for url in url_list:
         # event_date_list.append(title.text)
 
         # Find Descirption content of every event
-        context = events_driver.find_element(By.CLASS_NAME, "article")
+        try:
+            context = events_driver.find_element(By.CLASS_NAME, "article")
+        except:
+            context = events_driver.find_element(By.CLASS_NAME, "article")
+        
+
 
         article2_spans = [
             span_element
