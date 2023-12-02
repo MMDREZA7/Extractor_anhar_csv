@@ -40,11 +40,11 @@ dayCounter = 0
 for url in url_list:
     if dayCounter == 366:
         dayCounter = 0
-        print('first mounth finished')
-        print('first mounth finished')
-        print('first mounth finished')
-        print('first mounth finished')
-        print('first mounth finished')
+        print('first year finished')
+        print('first year finished')
+        print('first year finished')
+        print('first year finished')
+        print('first year finished')
 
     main_driver.get(url)
     dayCounter += 1
@@ -56,7 +56,11 @@ for url in url_list:
     # event_list.append(h1_element.text)
 
     # Find event links from every day
-    article1 = main_driver.find_element(By.CLASS_NAME, "article")
+    try:
+        article1 = main_driver.find_element(By.CLASS_NAME, "article")
+    except:
+        article1 = main_driver.find_element(By.CLASS_NAME, "article")
+
 
     article1_links = [
         element
@@ -93,7 +97,7 @@ for url in url_list:
         try:
             context = events_driver.find_element(By.CLASS_NAME, "article")
         except:
-            context = events_driver.find_element(By.CLASS_NAME, "article")
+            context='not found'
         
 
 
